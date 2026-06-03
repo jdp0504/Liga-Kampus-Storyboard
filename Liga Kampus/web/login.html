@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Liga-Kampus | Authentication Portal</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            background:#e9ecef;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .login-card {
+            border: none;
+            border-radius: 15px;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+        }
+        .login-header {
+            background: black;
+            color: white;
+            border-top-left-radius: 15px;
+            border-top-right-radius: 15px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-5">
+                
+                <div class="card login-card shadow-lg">
+                    
+                    <div class="login-header p-4 text-center">
+                        <i class="fa-solid fa-circle-user fa-3x mb-2"></i>
+                        <h1 class="h4 fw-bold mb-1">Liga-Kampus Portal</h1>
+                        <p class="small mb-0 opacity-75">Admin & Manager Access Portal</p>
+                    </div>
+
+                    <div class="card-body p-4">
+                        
+                        <div>
+                            <div class="mb-1"><strong>Admin:</strong> <code class="text-dark">admin</code> / <code class="text-dark">admin123</code></div>
+                            <div><strong>Manager:</strong> <code class="text-dark">fskm_manager</code> / <code class="text-dark">fskm123</code></div>
+                        </div>
+                        
+                        <form id="authForm" class="needs-validation" onsubmit="handleAuthSubmit(event)" novalidate>
+                            
+                            <div class="alert alert-danger d-none py-2 px-3 small mb-3 text-center" id="authErrorAlert">
+                                <i class="fa-solid fa-triangle-exclamation me-1"></i> Invalid security tokens or profile username.
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="usernameInput" class="form-label small fw-bold">Username</label>
+                                <div class="input-group">
+                                    <span class="input-group-text bg-light text-muted"><i class="fa-solid fa-user"></i></span>
+                                    <input type="text" class="form-control font-monospace" id="usernameInput" required placeholder="Enter Username">
+                                    <div class="invalid-feedback">Username descriptor cannot be empty.</div>
+                                </div>
+                            </div>
+
+                            <div class="mb-4">
+                                <label for="passwordInput" class="form-label small fw-bold">Password</label>
+                                <div class="input-group">
+                                    <span class="input-group-text bg-light text-muted"><i class="fa-solid fa-lock"></i></span>
+                                    <input type="password" class="form-control font-monospace" id="passwordInput" required placeholder="Enter Password">
+                                    <div class="invalid-feedback">Valid password character keys are required.</div>
+                                </div>
+                            </div>
+
+                            <button type="submit" class="btn btn-primary w-100 fw-semibold mb-3 py-2 shadow-sm" style="background:black; border:none;">
+                                Enter
+                            </button>
+
+                            <div class="text-center">
+                                <a href="index.html" class="text-decoration-none small text-muted">
+                                    <i class="fa-solid fa-arrow-left me-1"></i> Return to HomePage
+                                </a>
+                            </div>
+
+                        </form>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function handleAuthSubmit(event) {
+            event.preventDefault();
+            event.stopPropagation();
+
+            const form = document.getElementById('authForm');
+            const alertBox = document.getElementById('authErrorAlert');
+            
+            if (!form.checkValidity()) {
+                form.classList.add('was-validated');
+                return;
+            }
+
+            const username = document.getElementById('usernameInput').value.trim();
+            const password = document.getElementById('passwordInput').value;
+
+            alertBox.classList.add('d-none');
+
+            if (username === 'admin' && password === 'admin123') {
+                alert("Authorization complete! Access granted as System Administrator.");
+                window.location.href = "admin_dashboard.html";
+            } else if (username === 'fskm_manager' && password === 'fskm123') {
+                alert("Authorization complete! Access granted as FSKM Faculty Manager.");
+                window.location.href = "manager_dashboard.html";
+            } else {
+                alertBox.classList.remove('d-none');
+                form.classList.remove('was-validated');
+            }
+        }
+    </script>
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

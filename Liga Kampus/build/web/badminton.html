@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Liga-Kampus | Badminton Open</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Custom Active State Styles for Tabs */
+        .nav-pills .nav-link.active {
+            background-color: #c0e5c0; /* Crimson background on click */
+            color: #ffffff ; /* Pure white text for perfect visibility */
+        }
+        .bracket-node { 
+            background: #fff; 
+            border-left: 4px solid #198754; 
+            border-radius: 6px; 
+        }
+    </style>
+</head>
+<body class="bg-light d-flex flex-column min-vh-100">
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="index.html">
+                LIGA-KAMPUS
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="index.html">Home</a>
+                    </li>
+                    
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="sportsDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Sports
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="sportsDropdown">
+                            <li><a class="dropdown-menu-item dropdown-item" href="football.html">Football</a></li>
+                            <li><a class="dropdown-menu-item dropdown-item" href="badminton.html">Badminton</a></li>
+                            <li><a class="dropdown-menu-item dropdown-item" href="netball.html">Netball</a></li>
+                        </ul>
+                    </li>
+                </ul>
+                
+                <div class="d-flex align-items-center gap-2">
+                    <a href="user_login.html" class="btn btn-sm btn-danger fw-bold">Logout</a>
+                    <a href="login.html" class="btn btn-sm btn-light fw-bold">Admin/Manager Access</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="bg-success text-white py-4 mb-4 shadow-sm" style="background: linear-gradient(135deg, #0f6c3f 0%, #198754 100%) !important;">
+        <div class="container d-flex align-items-center">
+            <i class="fa-solid fa-table-tennis-tennis fs-1 me-3 text-warning"></i>
+            <div><h1 class="h3 fw-bold mb-0">Badminton</h1></div>
+        </div>
+    </div>
+
+    <main class="container mb-5 flex-grow-1">
+        <div class="row g-4">
+            
+            <div class="col-lg-8">
+                <ul class="nav nav-pills mb-4 bg-white p-2 rounded shadow-sm" id="sportStageTabs" role="tablist">
+                    <li class="nav-item flex-fill text-center" role="presentation">
+                        <button class="nav-link w-100 active fw-bold text-muted" id="group-stage-tab" data-bs-toggle="tab" data-bs-target="#group-stage" type="button" role="tab" aria-controls="group-stage" aria-selected="true">
+                           Group Stages
+                        </button>
+                    </li>
+                    <li class="nav-item flex-fill text-center" role="presentation">
+                        <button class="nav-link w-100 fw-bold text-muted" id="knockout-stage-tab" data-bs-toggle="tab" data-bs-target="#knockout-stage" type="button" role="tab" aria-controls="knockout-stage" aria-selected="false">
+                            Knockout Round
+                        </button>
+                    </li>
+                </ul>
+
+                <div class="tab-content" id="sportStageTabsContent">
+                    
+                    <div class="tab-pane fade show active" id="group-stage" role="tabpanel" aria-labelledby="group-stage-tab">
+                        <div class="card border-0 shadow-sm mb-4">
+                            <div class="card-header bg-white py-3">
+                                <h2 class="h5 mb-0 fw-bold text-success">Group A Standings</h2>
+                            </div>
+                            <div class="table-responsive">
+                                <table class="table table-hover align-middle mb-0 text-center">
+                                    <thead class="table-light">
+                                        <tr>
+                                            <th class="text-start ps-4">Player Contingent</th>
+                                            <th>P</th><th>W</th><th>L</th><th>SW</th><th>SL</th><th class="fw-bold text-primary">PTS</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr class="fw-semibold"><td class="text-start ps-4">Khairul (FSKM)</td><td>2</td><td>2</td><td>0</td><td>4</td><td>1</td><td class="text-primary fw-bold">4</td></tr>
+                                        <tr><td class="text-start ps-4">Chong (FK)</td><td>2</td><td>1</td><td>1</td><td>3</td><td>2</td><td class="text-primary fw-bold">2</td></tr>
+                                        <tr><td class="text-start ps-4">Siva (FSPU)</td><td>2</td><td>0</td><td>2</td><td>0</td><td>4</td><td class="text-primary fw-bold">0</td></tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <div class="card border-0 shadow-sm">
+                            <div class="card-header bg-white py-3">
+                                <h2 class="h5 mb-0 fw-bold text-dark">Group Stage Fixtures</h2>
+                            </div>
+                            <div class="table-responsive">
+                                <table class="table align-middle mb-0 text-center">
+                                    <thead class="table-dark">
+                                        <tr><th>Stage</th><th>Time / Slot</th><th>Matchup Details</th><th>Venue</th><th>Admin Status</th></tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr><td>Men's Singles (Group A)</td><td>June 1 • 9:00 AM</td><td>Khairul (FSKM) vs Chong (FK)</td><td>Court 1</td><td><span class="badge bg-success">Completed</span></td></tr>
+                                        <tr><td>Men's Singles (Group A)</td><td>June 2 • 11:00 AM</td><td>Ahmad (FPP) vs Siva (FSPU)</td><td>Court 2</td><td><span class="badge bg-success">Completed</span></td></tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tab-pane fade" id="knockout-stage" role="tabpanel" aria-labelledby="knockout-stage-tab">
+                        
+                        <div class="card border-0 shadow-sm p-3 mb-4 bg-white">
+                            <div class="d-flex flex-column flex-sm-row align-items-sm-center justify-content-between gap-2">
+                               
+                                <div class="btn-group btn-group-sm" role="group" aria-label="Bracket Categories">
+                                    <input type="radio" class="btn-check" name="bracketCat" id="catMensSingles" checked>
+                                    <label class="btn btn-outline-success px-3" for="catMensSingles">Men's Singles</label>
+
+                                    <input type="radio" class="btn-check" name="bracketCat" id="catWomensSingles">
+                                    <label class="btn btn-outline-success px-3" for="catWomensSingles">Women's Singles</label>
+
+                                    <input type="radio" class="btn-check" name="bracketCat" id="catMensDoubles">
+                                    <label class="btn btn-outline-success px-3" for="catMensDoubles">Men's Doubles</label>
+                                    
+                                    <input type="radio" class="btn-check" name="bracketCat" id="catWomensDoubles">
+                                    <label class="btn btn-outline-success px-3" for="catWomensDoubles">Women's Doubles</label>
+                                    
+                                    <input type="radio" class="btn-check" name="bracketCat" id="catMixDoubles">
+                                    <label class="btn btn-outline-success px-3" for="catMixDoubles">Mix Doubles</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card border-0 shadow-sm p-4 mb-4">
+                            <h2 class="h5 fw-bold text-success mb-4">Men's Singles Bracket</h2>
+                            <div class="row align-items-center g-3">
+                                <div class="col-md-5">
+                                    <div class="p-3 border bracket-node shadow-sm mb-3">
+                                        <div class="small text-muted mb-1">Semi Final 1 (Completed)</div>
+                                        <div class="d-flex justify-content-between font-monospace">
+                                            <span class="text-dark fw-bold">Khairul (FSKM)</span><span class="text-success fw-bold">2</span>
+                                        </div>
+                                        <div class="d-flex justify-content-between font-monospace text-muted small"><span>Chong (FK)</span><span>1</span></div>
+                                    </div>
+                                    <div class="p-3 border bracket-node shadow-sm">
+                                        <div class="small text-muted mb-1">Semi Final 2 (Completed)</div>
+                                        <div class="d-flex justify-content-between font-monospace">
+                                            <span class="text-dark fw-bold">Ahmad (FPP)</span><span class="text-success fw-bold">2</span>
+                                        </div>
+                                        <div class="d-flex justify-content-between font-monospace text-muted small"><span>Siva (FSPU)</span><span>0</span></div>
+                                    </div>
+                                </div>
+                                <div class="col-md-2 text-center text-muted d-none d-md-block"><i class="fa-solid fa-chevron-right fa-2x text-opacity-25"></i></div>
+                                <div class="col-md-5">
+                                    <div class="p-3 border bracket-node shadow-sm">
+                                        <div class="badge bg-secondary text-white mb-1 fw-bold">Final</div>
+                                        <div class="fw-bold text-dark mb-1">Khairul (FSKM)</div>
+                                        <div class="text-muted small mb-2">versus</div>
+                                        <div class="fw-bold text-dark">Ahmad (FPP)</div>
+                                        <hr class="my-2 text-warning">
+                                        <div class="small text-muted font-monospace">June 10, 8:00 PM</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card border-0 shadow-sm">
+                            <div class="card-header bg-white py-3">
+                                <h2 class="h5 mb-0 fw-bold text-dark">Knockout Bracket Schedule</h2>
+                            </div>
+                            <div class="table-responsive">
+                                <table class="table align-middle mb-0 text-center">
+                                    <thead class="table-dark">
+                                        <tr><th>Stage Bracket</th><th>Time / Slot</th><th>Matchup Details</th><th>Venue</th><th>Admin Status</th></tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr class="table-light"><td>Round of 16</td><td>June 4 • 9:00 AM</td><td>TBD</td><td>Courts 1-4</td><td><span class="badge bg-secondary">Scheduled</span></td></tr>
+                                        <tr><td>Women's Singles (Semis)</td><td>Today • 2:00 PM</td><td>Nurul (FSKM) vs Sarah (FPP)</td><td>Court 1</td><td><span class="badge bg-secondary text-white">Scheduled</span></td></tr>
+                                        <tr><td>Women's Singles (Semis)</td><td>Today • 3:30 PM</td><td>Lee (FK) vs Jane (FSPU)</td><td>Court 2</td><td><span class="badge bg-secondary">Scheduled</span></td></tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="col-lg-4">
+                <div class="card border-0 shadow-sm">
+                    <div class="card-header bg-white py-3 border-bottom">
+                        <h2 class="h6 mb-0 fw-bold text-success"><i class="fa-solid fa-clock-history me-2"></i>Results</h2>
+                    </div>
+                    <div class="list-group list-group-flush">
+                        <div class="list-group-item p-3">
+                            <div class="d-flex justify-content-between small text-muted mb-1"><span>Men's Singles SF1</span></div>
+                            <div class="fw-semibold small">Khairul (FSKM) def. Chong (FK)</div>
+                            <div class="text-muted font-monospace small">21-15, 18-21, 14-11</div>
+                        </div>
+                        <div class="list-group-item p-3">
+                            <div class="d-flex justify-content-between small text-muted mb-1"><span>Women's Singles SF1</span></div>
+                            <div class="fw-semibold small">Nurul (FSKM) vs Sarah (FPP)</div>
+                            <div class="text-muted font-monospace small fw-bold">21-1, 21-0</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <footer class="bg-dark text-white text-center py-4 mt-auto"></footer>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Liga-Kampus | Faculty Manager Portal</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="bg-light">
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm">
+        <div class="container">
+            <a class="navbar-brand fw-bold">
+                LIGA-KAMPUS 
+            </a>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                </ul>
+                <div class="navbar-nav">
+                    <span class="nav-link text-light me-3">Contingent: FSKM</span>
+                    <a href="index.html" class="btn btn-outline-danger btn-sm">Logout</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <header class="bg-white border-bottom py-4 mb-4 shadow-sm">
+        <div class="container">
+            <span class="text-uppercase tracking-wider small fw-bold text-primary">Faculty of Computer & Mathematical Sciences</span>
+            <h1 class="h3 fw-bold mb-1">Athlete Management</h1>
+            <p class="text-muted mb-0">Register athletes within sport squad limits (Football: 14, Badminton: 6, Netball: 10).</p>
+        </div>
+    </header>
+
+    <main class="container my-4">
+        <div class="row g-4">
+            
+            <div class="col-lg-4">
+                <div class="card border-0 shadow-sm mb-4" id="registrationFormCard">
+                    <div class="card-header bg-primary text-white py-3">
+                        <h2 class="h6 mb-0 fw-bold" id="formHeader">Register New Athlete</h2>
+                    </div>
+                    <div class="card-body">
+                        <form id="athleteForm" action="#" method="POST">
+                            
+                            <div class="mb-3">
+                                <label class="form-label small fw-bold">Student ID</label>
+                                <input type="text" class="form-control" id="studentId" placeholder="e.g., 2024123456" required>
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label small fw-bold">Full Name</label>
+                                <input type="text" class="form-control" id="fullName" placeholder="e.g., Muhammad Haziq" required>
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label small fw-bold">Assigned Sport Category</label>
+                                <select class="form-select" id="sportCategory" onchange="updateEventDropdown()" required>
+                                    <option value="">-- Choose Sport --</option>
+                                    <option value="Football">Football (Max 14)</option>
+                                    <option value="Badminton">Badminton (Max 6)</option>
+                                    <option value="Netball">Netball (Max 10)</option>
+                                </select>
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label small fw-bold">Specific Event</label>
+                                <select class="form-select" id="eventCategory" required disabled>
+                                    <option value="">-- Select Sport First --</option>
+                                </select>
+                            </div>
+
+                            <div class="row g-2 mb-4">
+                                <div class="col-4">
+                                    <label class="form-label small fw-bold">Jersey #</label>
+                                    <input type="number" class="form-control" id="jerseyNum" placeholder="10" min="1" max="99">
+                                </div>
+                                <div class="col-8">
+                                    <label class="form-label small fw-bold">Tactical Position</label>
+                                    <input type="text" class="form-control" id="position" placeholder="e.g., Striker, Defender, GK">
+                                </div>
+                            </div>
+
+                            <button type="submit" class="btn btn-primary w-100 fw-semibold mb-2" id="submitBtn">
+                               Save Registration
+                            </button>
+                            <button type="button" class="btn btn-light border w-100 fw-semibold d-none" id="cancelBtn" onclick="resetForm()">
+                                Cancel Edit
+                            </button>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="card border-0 shadow-sm text-dark bg-white">
+                    <div class="card-body">
+                        <h3 class="h6 fw-bold border-bottom pb-2 mb-3"><i class="fa-solid fa-circle-info text-primary me-2"></i>Roster Limitations</h3>
+                        
+                        <div class="d-flex justify-content-between mb-2 small">
+                            <span>Football Status:</span>
+                            <span class="text-danger fw-bold" id="footballCountLabel">14 / 14 (FULL)</span>
+                        </div>
+                        <div class="progress mb-3" style="height: 6px;">
+                            <div class="bg-danger" role="progressbar" id="footballProgress" style="width: 100%;"></div>
+                        </div>
+
+                        <div class="d-flex justify-content-between mb-2 small">
+                            <span>Badminton Status:</span>
+                            <span class="fw-bold" id="badmintonCountLabel">1 / 6</span>
+                        </div>
+                        <div class="progress mb-3" style="height: 6px;">
+                            <div class="bg-success" role="progressbar" id="badmintonProgress" style="width: 16.6%;"></div>
+                        </div>
+
+                        <div class="d-flex justify-content-between mb-2 small">
+                            <span>Netball Status:</span>
+                            <span class="fw-bold" id="netballCountLabel">1 / 10</span>
+                        </div>
+                        <div class="progress" style="height: 6px;">
+                            <div class="bg-info" role="progressbar" id="netballProgress" style="width: 10%;"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-8">
+                <div class="card border-0 shadow-sm p-4 bg-white">
+                    
+                    <ul class="nav nav-tabs mb-4" id="rosterTab" role="tablist">
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link active" id="fb-tab" data-bs-toggle="tab" data-bs-target="#fb-pane" type="button" role="tab">Football <span class="badge bg-danger">14</span></button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="bad-tab" data-bs-toggle="tab" data-bs-target="#bad-pane" type="button" role="tab">Badminton <span class="badge bg-secondary">1</span></button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="net-tab" data-bs-toggle="tab" data-bs-target="#net-pane" type="button" role="tab">Netball <span class="badge bg-secondary">1</span></button>
+                        </li>
+                    </ul>
+
+                    <div class="tab-content" id="rosterTabContent">
+                        
+                        <div class="tab-pane fade show active" id="fb-pane" role="tabpanel">
+                            
+                            <div class="table-responsive">
+                                <table class="table table-hover align-middle mb-0">
+                                    <thead class="table-light">
+                                        <tr><th>Athlete Name</th><th>Event Details</th><th>Jersey / Position</th><th class="text-center">Actions</th></tr>
+                                    </thead>
+                                    <tbody id="footballTableBody">
+                                        <tr id="row-20240001"><td><span class="fw-bold d-block">Ammar Zamil</span><small class="text-muted font-monospace">ID: 20240001</small></td><td><span class="badge bg-dark">Football Open</span></td><td>#10 (Striker)</td><td class="text-center"><div class="btn-group btn-group-sm"><button type="button" class="btn btn-outline-primary" onclick="triggerEdit('Ammar Zamil', '20240001', 'Football', 'Football Open', '10', 'Striker')"><i class="fa-solid fa-user-pen"></i></button><button type="button" class="btn btn-outline-danger" onclick="deleteAthlete('20240001', 'Football')"><i class="fa-solid fa-user-xmark"></i></button></div></td></tr>
+                                        <tr id="row-20240002"><td><span class="fw-bold d-block">Muhammad Haziq</span><small class="text-muted font-monospace">ID: 20240002</small></td><td><span class="badge bg-dark">Football Open</span></td><td>#1 (Goalkeeper)</td><td class="text-center"><div class="btn-group btn-group-sm"><button type="button" class="btn btn-outline-primary" onclick="triggerEdit('Muhammad Haziq', '20240002', 'Football', 'Football Open', '1', 'Goalkeeper')"><i class="fa-solid fa-user-pen"></i></button><button type="button" class="btn btn-outline-danger" onclick="deleteAthlete('20240002', 'Football')"><i class="fa-solid fa-user-xmark"></i></button></div></td></tr>
+                                        <tr id="row-20240003"><td><span class="fw-bold d-block">Aiman Hakim</span><small class="text-muted font-monospace">ID: 20240003</small></td><td><span class="badge bg-dark">Football Open</span></td><td>#4 (Defender)</td><td class="text-center"><div class="btn-group btn-group-sm"><button type="button" class="btn btn-outline-primary" onclick="triggerEdit('Aiman Hakim', '20240003', 'Football', 'Football Open', '4', 'Defender')"><i class="fa-solid fa-user-pen"></i></button><button type="button" class="btn btn-outline-danger" onclick="deleteAthlete('20240003', 'Football')"><i class="fa-solid fa-user-xmark"></i></button></div></td></tr>
+                                        <tr id="row-20240004"><td><span class="fw-bold d-block">Danial Arif</span><small class="text-muted font-monospace">ID: 20240004</small></td><td><span class="badge bg-dark">Football Open</span></td><td>#5 (Defender)</td><td class="text-center"><div class="btn-group btn-group-sm"><button type="button" class="btn btn-outline-primary" onclick="triggerEdit('Danial Arif', '20240004', 'Football', 'Football Open', '5', 'Defender')"><i class="fa-solid fa-user-pen"></i></button><button type="button" class="btn btn-outline-danger" onclick="deleteAthlete('20240004', 'Football')"><i class="fa-solid fa-user-xmark"></i></button></div></td></tr>
+                                        <tr id="row-20240005"><td><span class="fw-bold d-block">Luqman Faiz</span><small class="text-muted font-monospace">ID: 20240005</small></td><td><span class="badge bg-dark">Football Open</span></td><td>#6 (Midfielder)</td><td class="text-center"><div class="btn-group btn-group-sm"><button type="button" class="btn btn-outline-primary" onclick="triggerEdit('Luqman Faiz', '20240005', 'Football', 'Football Open', '6', 'Midfielder')"><i class="fa-solid fa-user-pen"></i></button><button type="button" class="btn btn-outline-danger" onclick="deleteAthlete('20240005', 'Football')"><i class="fa-solid fa-user-xmark"></i></button></div></td></tr>
+                                        <tr id="row-20240006"><td><span class="fw-bold d-block">Faris Najmi</span><small class="text-muted font-monospace">ID: 20240006</small></td><td><span class="badge bg-dark">Football Open</span></td><td>#7 (Winger)</td><td class="text-center"><div class="btn-group btn-group-sm"><button type="button" class="btn btn-outline-primary" onclick="triggerEdit('Faris Najmi', '20240006', 'Football', 'Football Open', '7', 'Winger')"><i class="fa-solid fa-user-pen"></i></button><button type="button" class="btn btn-outline-danger" onclick="deleteAthlete('20240006', 'Football')"><i class="fa-solid fa-user-xmark"></i></button></div></td></tr>
+                                        <tr id="row-20240007"><td><span class="fw-bold d-block">Syamil Izwan</span><small class="text-muted font-monospace">ID: 20240007</small></td><td><span class="badge bg-dark">Football Open</span></td><td>#8 (Midfielder)</td><td class="text-center"><div class="btn-group btn-group-sm"><button type="button" class="btn btn-outline-primary" onclick="triggerEdit('Syamil Izwan', '20240007', 'Football', 'Football Open', '8', 'Midfielder')"><i class="fa-solid fa-user-pen"></i></button><button type="button" class="btn btn-outline-danger" onclick="deleteAthlete('20240007', 'Football')"><i class="fa-solid fa-user-xmark"></i></button></div></td></tr>
+                                        <tr id="row-20240008"><td><span class="fw-bold d-block">Irfan Bakhtiar</span><small class="text-muted font-monospace">ID: 20240008</small></td><td><span class="badge bg-dark">Football Open</span></td><td>#9 (Striker)</td><td class="text-center"><div class="btn-group btn-group-sm"><button type="button" class="btn btn-outline-primary" onclick="triggerEdit('Irfan Bakhtiar', '20240008', 'Football', 'Football Open', '9', 'Striker')"><i class="fa-solid fa-user-pen"></i></button><button type="button" class="btn btn-outline-danger" onclick="deleteAthlete('20240008', 'Football')"><i class="fa-solid fa-user-xmark"></i></button></div></td></tr>
+                                        <tr id="row-20240009"><td><span class="fw-bold d-block">Zaeril Imad</span><small class="text-muted font-monospace">ID: 20240009</small></td><td><span class="badge bg-dark">Football Open</span></td><td>#11 (Winger)</td><td class="text-center"><div class="btn-group btn-group-sm"><button type="button" class="btn btn-outline-primary" onclick="triggerEdit('Zaeril Imad', '20240009', 'Football', 'Football Open', '11', 'Winger')"><i class="fa-solid fa-user-pen"></i></button><button type="button" class="btn btn-outline-danger" onclick="deleteAthlete('20240009', 'Football')"><i class="fa-solid fa-user-xmark"></i></button></div></td></tr>
+                                        <tr id="row-20240010"><td><span class="fw-bold d-block">Hazim Azhar</span><small class="text-muted font-monospace">ID: 20240010</small></td><td><span class="badge bg-dark">Football Open</span></td><td>#2 (Defender)</td><td class="text-center"><div class="btn-group btn-group-sm"><button type="button" class="btn btn-outline-primary" onclick="triggerEdit('Hazim Azhar', '20240010', 'Football', 'Football Open', '2', 'Defender')"><i class="fa-solid fa-user-pen"></i></button><button type="button" class="btn btn-outline-danger" onclick="deleteAthlete('20240010', 'Football')"><i class="fa-solid fa-user-xmark"></i></button></div></td></tr>
+                                        <tr id="row-20240011"><td><span class="fw-bold d-block">Muiz Ezrin</span><small class="text-muted font-monospace">ID: 20240011</small></td><td><span class="badge bg-dark">Football Open</span></td><td>#14 (Midfielder)</td><td class="text-center"><div class="btn-group btn-group-sm"><button type="button" class="btn btn-outline-primary" onclick="triggerEdit('Muiz Ezrin', '20240011', 'Football', 'Football Open', '14', 'Midfielder')"><i class="fa-solid fa-user-pen"></i></button><button type="button" class="btn btn-outline-danger" onclick="deleteAthlete('20240011', 'Football')"><i class="fa-solid fa-user-xmark"></i></button></div></td></tr>
+                                        <tr id="row-20240012"><td><span class="fw-bold d-block">Ashraf Dani</span><small class="text-muted font-monospace">ID: 20240012</small></td><td><span class="badge bg-dark">Football Open</span></td><td>#17 (Sub Forward)</td><td class="text-center"><div class="btn-group btn-group-sm"><button type="button" class="btn btn-outline-primary" onclick="triggerEdit('Ashraf Dani', '20240012', 'Football', 'Football Open', '17', 'Sub Forward')"><i class="fa-solid fa-user-pen"></i></button><button type="button" class="btn btn-outline-danger" onclick="deleteAthlete('20240012', 'Football')"><i class="fa-solid fa-user-xmark"></i></button></div></td></tr>
+                                        <tr id="row-20240013"><td><span class="fw-bold d-block">Idlan Shah</span><small class="text-muted font-monospace">ID: 20240013</small></td><td><span class="badge bg-dark">Football Open</span></td><td>#21 (Sub Midfielder)</td><td class="text-center"><div class="btn-group btn-group-sm"><button type="button" class="btn btn-outline-primary" onclick="triggerEdit('Idlan Shah', '20240013', 'Football', 'Football Open', '21', 'Sub Midfielder')"><i class="fa-solid fa-user-pen"></i></button><button type="button" class="btn btn-outline-danger" onclick="deleteAthlete('20240013', 'Football')"><i class="fa-solid fa-user-xmark"></i></button></div></td></tr>
+                                        <tr id="row-20240014"><td><span class="fw-bold d-block">Khairin Imran</span><small class="text-muted font-monospace">ID: 20240014</small></td><td><span class="badge bg-dark">Football Open</span></td><td>#23 (Sub GK)</td><td class="text-center"><div class="btn-group btn-group-sm"><button type="button" class="btn btn-outline-primary" onclick="triggerEdit('Khairin Imran', '20240014', 'Football', 'Football Open', '23', 'Sub GK')"><i class="fa-solid fa-user-pen"></i></button><button type="button" class="btn btn-outline-danger" onclick="deleteAthlete('20240014', 'Football')"><i class="fa-solid fa-user-xmark"></i></button></div></td></tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <div class="tab-pane fade" id="bad-pane" role="tabpanel">
+                            <div class="table-responsive">
+                                <table class="table table-hover align-middle mb-0">
+                                    <thead class="table-light">
+                                        <tr><th>Athlete Name</th><th>Event Details</th><th>Jersey / Position</th><th class="text-center">Actions</th></tr>
+                                    </thead>
+                                    <tbody id="badmintonTableBody">
+                                        <tr id="row-2023992019">
+                                            <td><span class="fw-bold d-block">Khairul Hafiz</span><small class="text-muted font-monospace">ID: 2023992019</small></td>
+                                            <td><span class="badge bg-success">Men's Singles</span></td>
+                                            <td>— (Singles Seed)</td>
+                                            <td class="text-center">
+                                                <div class="btn-group btn-group-sm">
+                                                    <button type="button" class="btn btn-outline-primary" onclick="triggerEdit('Khairul Hafiz', '2023992019', 'Badminton', 'Men\'s Singles', '', 'Singles Seed')"><i class="fa-solid fa-user-pen"></i></button>
+                                                    <button type="button" class="btn btn-outline-danger" onclick="deleteAthlete('2023992019', 'Badminton')"><i class="fa-solid fa-user-xmark"></i></button>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <div class="tab-pane fade" id="net-pane" role="tabpanel">
+                            <div class="table-responsive">
+                                <table class="table table-hover align-middle mb-0">
+                                    <thead class="table-light">
+                                        <tr><th>Athlete Name</th><th>Event Details</th><th>Jersey / Position</th><th class="text-center">Actions</th></tr>
+                                    </thead>
+                                    <tbody id="netballTableBody">
+                                        <tr id="row-2024119284">
+                                            <td><span class="fw-bold d-block">Nurul Izzah</span><small class="text-muted font-monospace">ID: 2024119284</small></td>
+                                            <td><span class="badge bg-info text-dark">Women's Open</span></td>
+                                            <td>#7 (Goal Keeper)</td>
+                                            <td class="text-center">
+                                                <div class="btn-group btn-group-sm">
+                                                    <button type="button" class="btn btn-outline-primary" onclick="triggerEdit('Nurul Izzah', '2024119284', 'Netball', 'Women\'s Open', '7', 'Goal Keeper')"><i class="fa-solid fa-user-pen"></i></button>
+                                                    <button type="button" class="btn btn-outline-danger" onclick="deleteAthlete('2024119284', 'Netball')"><i class="fa-solid fa-user-xmark"></i></button>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <footer class="bg-dark text-white text-center py-3 mt-5 small">
+        
+    </footer>
+
+     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

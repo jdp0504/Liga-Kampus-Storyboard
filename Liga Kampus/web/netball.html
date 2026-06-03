@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Liga-Kampus | Netball Arena</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .nav-pills .nav-link {
+            color: #6c757d; 
+            transition: all 0.2s ease-in-out;
+        }
+
+        .nav-pills .nav-link.active {
+            background-color: #d91b5c;
+            color: #ffffff;
+        }
+    </style>
+</head>
+<body class="bg-light d-flex flex-column min-vh-100">
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="index.html">
+                LIGA-KAMPUS
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="index.html">Home</a>
+                    </li>
+                    
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="sportsDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Sports
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="sportsDropdown">
+                            <li><a class="dropdown-menu-item dropdown-item" href="football.html">Football</a></li>
+                            <li><a class="dropdown-menu-item dropdown-item" href="badminton.html">Badminton</a></li>
+                            <li><a class="dropdown-menu-item dropdown-item" href="netball.html">Netball</a></li>
+                        </ul>
+                    </li>
+                </ul>
+                
+                <div class="d-flex align-items-center gap-2">
+                    <a href="user_login.html" class="btn btn-sm btn-danger fw-bold">Logout</a>
+                    <a href="login.html" class="btn btn-sm btn-light fw-bold">Admin/Manager Access</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="bg-white border-bottom py-4 mb-4 shadow-sm" style="background: linear-gradient(135deg, #d91b5c 0%, #a2103e 100%) !important;">
+        <div class="container d-flex align-items-center">
+            <div>
+                <h1 class="h3 fw-bold mb-1 text-white">Netball</h1>   
+            </div>
+        </div>
+    </div>
+
+    <main class="container mb-5 flex-grow-1">
+        <div class="row g-4">
+            
+            <div class="col-lg-8">
+                <ul class="nav nav-pills mb-4 bg-white p-2 rounded shadow-sm" id="sportStageTabs" role="tablist">
+                    <li class="nav-item flex-fill text-center" role="presentation">
+                        <button class="nav-link w-100 active fw-bold" id="group-stage-tab" data-bs-toggle="tab" data-bs-target="#group-stage" type="button" role="tab" aria-controls="group-stage" aria-selected="true">
+                            Group Stages
+                        </button>
+                    </li>
+                    <li class="nav-item flex-fill text-center" role="presentation">
+                        <button class="nav-link w-100 fw-bold" id="knockout-stage-tab" data-bs-toggle="tab" data-bs-target="#knockout-stage" type="button" role="tab" aria-controls="knockout-stage" aria-selected="false">
+                            Knockout Round
+                        </button>
+                    </li>
+                </ul>
+
+                <div class="tab-content" id="sportStageTabsContent">
+                    
+                    <div class="tab-pane fade show active" id="group-stage" role="tabpanel" aria-labelledby="group-stage-tab">
+                        <div class="card border-0 shadow-sm mb-4">
+                            <div class="card-header bg-white py-3">
+                                <h2 class="h5 mb-0 fw-bold" style="color: #d91b5c;">Championship Group Standings</h2>
+                            </div>
+                            <div class="table-responsive">
+                                <table class="table table-hover align-middle mb-0 text-center">
+                                    <thead class="table-light">
+                                        <tr>
+                                            <th class="text-start ps-4">Team Contingent</th>
+                                            <th>W</th><th>L</th><th>PF</th><th>PA</th><th class="fw-bold" style="color: #d91b5c;">STATUS</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr class="fw-semibold"><td class="text-start ps-4">FPP Queens</td><td>1</td><td>0</td><td>14</td><td>12</td><td><span class="badge bg-success">Qualified</span></td></tr>
+                                        <tr><td class="text-start ps-4">FSKM Vipers</td><td>0</td><td>1</td><td>12</td><td>14</td><td><span class="badge bg-danger text-white">Not Qualified</span></td></tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <div class="card border-0 shadow-sm">
+                            <div class="card-header bg-white py-3">
+                                <h2 class="h5 mb-0 fw-bold text-dark">Group Stage Fixtures</h2>
+                            </div>
+                            <div class="table-responsive">
+                                <table class="table align-middle mb-0 text-center">
+                                    <thead class="table-dark">
+                                        <tr><th>Stage</th><th>Time / Slot</th><th>Matchup</th><th>Venue</th><th>Admin Status</th></tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr><td>Group Stage</td><td>June 2 • 10:00 AM</td><td>FPP Queens vs FSKM Vipers</td><td>Outdoor Court A</td><td><span class="badge bg-success">Completed</span></td></tr>
+                                        <tr><td>Group Stage</td><td>Today • 4:15 PM</td><td>FSKM Vipers vs FK United</td><td>Outdoor Court A</td><td><span class="badge bg-success text-whitee">Completed</span></td></tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tab-pane fade" id="knockout-stage" role="tabpanel" aria-labelledby="knockout-stage-tab">
+                        <div class="card border-0 shadow-sm mb-4">
+                            <div class="card-header bg-white py-3">
+                                <h2 class="h5 mb-0 fw-bold" style="color: #d91b5c;">Knockout Bracket Schedule</h2>
+                            </div>
+                            <div class="table-responsive">
+                                <table class="table align-middle mb-0 text-center">
+                                    <thead class="table-dark">
+                                        <tr><th>Stage Bracket</th><th>Time / Slot</th><th>Matchup</th><th>Venue</th><th>Admin Status</th></tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr class="table-light"><td>Round of 16</td><td>June 4 • 10:00 AM</td><td>TBD vs TBD</td><td>Outdoor Court B</td><td><span class="badge bg-secondary text-white">Scheduled</span></td></tr>
+                                        <tr class="table-light"><td>Quarter-Finals</td><td>June 6 • 11:00 AM</td><td>TBD vs TBD</td><td>Outdoor Court A</td><td><span class="badge bg-secondary text-white">Scheduled</span></td></tr>
+                                        <tr><td>Semi-Final 1</td><td>June 8 • 3:00 PM</td><td>TBD vs TBD</td><td>Outdoor Court A</td><td><span class="badge bg-secondary text-white">Scheduled</span></td></tr>
+                                        <tr class="table-danger-subtle"><td>Grand Final</td><td>June 5 • 11:00 AM</td><td>FK United vs FPP Queens</td><td>Outdoor Court B</td><td><span class="badge bg-secondary text-white">Scheduled</span></td></tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="col-lg-4">
+                <div class="card border-0 shadow-sm">
+                    <div class="card-header bg-white py-3 border-bottom">
+                        <h2 class="h6 mb-0 fw-bold text-muted"><i class="fa-solid fa-clock-history me-2"></i>Results</h2>
+                    </div>
+                    <div class="list-group list-group-flush">
+                        <div class="list-group-item p-3 bg-light">
+                            <div class="d-flex justify-content-between small text-muted mb-2">
+                                <span>Group Stage • June 2, 10:00 AM</span>
+                            </div>
+                            <div class="d-flex justify-content-between align-items-center mb-1">
+                                <span class="fw-bold">FPP</span><span class="badge bg-dark px-3 font-monospace">14 — 12</span><span class="fw-bold">FSKM</span>
+                            </div>
+                        </div>
+                        <div class="list-group-item p-3">
+                            <div class="d-flex justify-content-between small text-muted mb-2">
+                                <span>Group Stage • Today, 4:15 PM</span>
+                            </div>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <span class="fw-bold">FSKM</span><span class="badge bg-dark px-3 font-monospace">9 — 6</span><span class="fw-bold">FK</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <footer class="bg-dark text-white text-center py-4 mt-auto"></footer>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
